@@ -1,0 +1,47 @@
+<DocumentElement xmlns="http://tempuri.org/Ruleset.xsd">
+  <Scripts>
+    <ScriptName>SidebarData</ScriptName>
+    <FolderID>2</FolderID>
+    <Script>
+function onInit()
+	local aRecordOverrides = {
+		["circus"] = { 
+			bExport = false,
+			aDataMap = { "reference.circuses" }, 
+			sRecordDisplayClass = "circus", 
+			--sListDisplayClass = "abilitylist",
+			sSidebarCategory  = "player",
+			--aCustomFilters = {
+			--	["Type"] = { sField = "type" },
+			--}
+		},
+		["show"] = { 
+			bExport = false,
+			aDataMap = { "reference.shows" }, 
+			sRecordDisplayClass = "show", 
+			--sListDisplayClass = "abilitylist",
+			sSidebarCategory  = "player",
+			--aCustomFilters = {
+			--	["Type"] = { sField = "type" },
+			--}
+		}
+	}
+	
+	LibraryData.overrideRecordTypes(aRecordOverrides)
+	
+	if Session.isHost then
+		local circuses = DB.findNode("reference.circuses");
+		if circuses then
+			circuses.setPublic(true);
+		end
+		local shows = DB.findNode("reference.shows");
+		if shows then
+			shows.setPublic(true);
+		end
+	end
+end
+</Script>
+    <RegisterScript>true</RegisterScript>
+    <Encoding />
+  </Scripts>
+</DocumentElement>
