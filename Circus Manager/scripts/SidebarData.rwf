@@ -2,25 +2,58 @@
   <Scripts>
     <ScriptName>SidebarData</ScriptName>
     <FolderID>2</FolderID>
-    <Script>
+    <Script>local ADVERTISEMENT_TIERS = {
+	{ tier = 1, cost = 1, ant = 1 },
+	{ tier = 2, cost = 5, ant = 2 },
+	{ tier = 3, cost = 20, ant = 4 },
+	{ tier = 4, cost = 40, ant = 6 },
+	{ tier = 5, cost = 80, ant = 9 },
+	{ tier = 6, cost = 150, ant = 12 },
+	{ tier = 7, cost = 250, ant = 16 },
+	{ tier = 8, cost = 500, ant = 20 },
+	{ tier = 9, cost = 800, ant = 25 },
+	{ tier = 10, cost = 1200, ant = 30 },
+	{ tier = 11, cost = 2000, ant = 40 },
+	{ tier = 12, cost = 3000, ant = 50 }
+}
+
+
 function onInit()
+	local aListViews = {
+		["advertisement_tier"] = {
+			aColumns = {
+				{ sName = "name", sType = "string", sHeadingRes = "background_grouped_label_name", nWidth=200 },
+				{ sName = "tier", sType = "number", nSortOrder = 1, bCentered = true }
+			}
+		}
+	}
 	local aRecordOverrides = {
 		["circus"] = { 
 			bExport = false,
-			aDataMap = { "reference.circuses" }, 
+			aDataMap = { "circus.circuses" }, 
 			sRecordDisplayClass = "circus", 
 			--sListDisplayClass = "abilitylist",
-			sSidebarCategory  = "player",
+			sSidebarCategory  = "campaign",
 			--aCustomFilters = {
 			--	["Type"] = { sField = "type" },
 			--}
 		},
 		["show"] = { 
 			bExport = false,
-			aDataMap = { "reference.shows" }, 
+			aDataMap = { "circus.shows" }, 
 			sRecordDisplayClass = "show", 
 			--sListDisplayClass = "abilitylist",
-			sSidebarCategory  = "player",
+			sSidebarCategory  = "campaign",
+			--aCustomFilters = {
+			--	["Type"] = { sField = "type" },
+			--}
+		},
+		["advertisement_tier"] = { 
+			bExport = false,
+			aDataMap = { "circus.advertisement_tiers" }, 
+			sRecordDisplayClass = "advertisement_tier", 
+			--sListDisplayClass = "abilitylist",
+			sSidebarCategory  = "campaign",
 			--aCustomFilters = {
 			--	["Type"] = { sField = "type" },
 			--}
@@ -28,15 +61,31 @@ function onInit()
 	}
 	
 	LibraryData.overrideRecordTypes(aRecordOverrides)
+	LibraryData.setRecordViews(aListViews)
 	
-	if Session.isHost then
-		local circuses = DB.findNode("reference.circuses");
+	Debug.console("INITTING SIDEBAR 1")
+	
+	if Session.IsHost then
+		Debug.console("INITTING SIDEBAR 2")
+		local circuses = DB.findNode("circus.circuses");
 		if circuses then
 			circuses.setPublic(true);
 		end
-		local shows = DB.findNode("reference.shows");
+		local shows = DB.findNode("circus.shows");
 		if shows then
 			shows.setPublic(true);
+		end
+		local advertisement_tiers = DB.createNode("circus.advertisement_tiers")
+		advertisement_tiers.setPublic(true)
+		DB.deleteChildren(advertisement_tiers)
+		
+		for _, t in ipairs(ADVERTISEMENT_TIERS) do 
+			local child = advertisement_tiers.createChild()
+			Debug.console(t.tier, t.cost, t.ant)
+			DB.setValue(child, "tier", "number", t.tier)
+			DB.setValue(child,"ant", "number", t.ant)
+			DB.setValue(child,"cost", "number", t.cost)
+			DB.setValue(child,"name", "string", "Tier " .. tostring(t.tier))
 		end
 	end
 end
