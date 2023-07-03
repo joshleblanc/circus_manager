@@ -2,15 +2,130 @@
   <Scripts>
     <ScriptName>CircusManager</ScriptName>
     <FolderID>1</FolderID>
-    <Script>
-function onInit()
-	Comm.registerSlashHandler("cm", function()
-		Interface.openWindow("CircusManager", "")
-	end)
-	
-	Debug.chat("initialized")
+    <Script>function PerformShow(nodeShow)
+	CalcShow(nodeShow)
+	DB.setValue(nodeShow, "performed", "number", 1)
 end
-</Script>
+
+function CalcShow(nodeShow)
+	if DB.getValue(nodeShow, "performed") then return end
+	
+	local _, sCircusRecordName = DB.getValue(nodeShow, "linkCircus")
+	
+	local nodeCircus = DB.findNode(sCircusRecordName)
+	
+	if not nodeCircus then return end
+	
+	CalcCircus(nodeCircus)
+
+	local anticipation = 0
+	local excitement = 0
+	local payout = 0
+	local prestige = DB.getValue(nodeCircus, "prestige")
+	local maxAnt = DB.getValue(nodeCircus, "maxAnt", 20)
+
+	local value = DB.getValue(nodeShow, "advertisementTier")
+	local _, _, number = string.find(value, "Tier (%d+)")
+	local tier = SidebarData.ADVERTISEMENT_TIERS[tonumber(number)] or { ant = 0 }
+	
+	local binos = DB.getValue(nodeShow, "binos") == 1
+	if binos then 
+		maxAnt = nil
+	end
+		
+	if DB.getValue(nodeCircus, "up4") == 1 then 
+		excitement = excitement + 5
+	end
+	
+	if DB.getValue(nodeCircus, "up5") == 1 then 
+		excitement = excitement + 10
+	end
+	
+	if DB.getValue(nodeCircus, "up6") == 1 then 
+		excitement = excitement + 20
+	elseif DB.getValue(nodeCircus, "up5") == 1 then
+		excitement = excitement + 10
+	elseif DB.getValue(nodeCircus, "up4") == 1 then
+		excitement = excitement + 5
+	end	
+	
+	local beerAnt = DB.getValue(nodeShow, "beer_anticipation", 0)
+	local confectionExc = DB.getValue(nodeShow, "confection_excitement", 0)
+	
+	anticipation = anticipation + tier.ant
+	anticipation = anticipation + DB.getValue(nodeShow, "promotion")
+	anticipation = anticipation + beerAnt
+	
+	excitement = excitement + confectionExc
+	
+	for i=1,7 do 
+		local trickLevel = DB.getValue(nodeShow, "trick_" .. i .. "_level")
+		for j=1,3 do 
+			local result = DB.getValue(nodeShow, "trick_" .. i .. "_result_" .. j)
+			if result == "crit_fail" then 
+				excitement = excitement - math.ceil(trickLevel / 2)
+			elseif result == "fail" then 
+				-- no effect
+			elseif result == "success" then 
+				excitement = excitement + trickLevel
+			elseif result == "crit_success" then 
+				excitement = excitement + trickLevel
+				anticipation = anticipation + math.ceil(trickLevel / 2)
+			end
+		end
+	end
+	
+	if maxAnt ~= nil and anticipation &gt; maxAnt then 
+		anticipation = maxAnt
+	end
+	
+	if excitement &gt; anticipation then 
+		payout = prestige + anticipation
+		prestige = prestige + 2
+		if DB.getValue(nodeShow, "bad_weather") == 1 then 
+			payout = payout * 2
+		end
+	elseif excitement &lt; anticipation then 
+		payout = math.floor((prestige + excitement) / 4)
+		prestige = prestige + 1
+	else 
+		payout = (DB.getValue(nodeCircus, "prestige") + anticipation) * 2
+		prestige = prestige + 4
+		if DB.getValue(nodeShow, "bad_weather") == 1 then 
+			payout = payout * 2
+		end
+	end
+	
+	DB.setValue(nodeCircus, "prestige", "number", prestige)
+	DB.setValue(nodeShow, "anticipation", "number", anticipation)
+	DB.setValue(nodeShow, "excitement", "number", excitement)
+	DB.setValue(nodeShow, "maxAnt", "number", maxAnt)
+	DB.setValue(nodeShow, "payout", "number", payout)
+end
+
+function CalcCircus(nodeCircus)
+	local prestige = 1
+	local maxAnt = 20
+	
+	if DB.getValue(nodeCircus, "up8") == 1 then 
+		maxAnt = 50
+	elseif DB.getValue(nodeCircus, "up9") == 1 then
+		maxAnt = 100
+	elseif DB.getValue(nodeCircus, "up10") == 1 then 
+		maxAnt = 200
+	end
+	
+	if DB.getValue(nodeCircus, "up4") == 1 or DB.getValue(nodeCircus, "up5") == 1 or DB.getValue(nodeCircus, "up6") == 1 then 
+		maxAnt = maxAnt - 10
+	end
+	
+	if DB.getValue(nodeCircus, "up7") == 1 then 
+		prestige = prestige + 1
+	end
+	
+	DB.setValue(nodeCircus, "maxAnt", 'number', maxAnt)
+	DB.setValue(nodeCircus, "prestige", "number", prestige)
+end</Script>
     <RegisterScript>true</RegisterScript>
     <Encoding />
   </Scripts>

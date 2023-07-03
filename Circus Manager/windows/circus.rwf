@@ -184,8 +184,8 @@ function onInit()
 	updateUpgrades()
 	for i=1,11 do 
 		self["up" .. tostring(i)].onValueChanged = function(a)
-			Debug.print(a)
 			updateUpgrades()
+			CircusManager.CalcCircus(getDatabaseNode())
 		end
 	end
 end
@@ -274,7 +274,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>IconControl1</ControlName>
-    <ZIndex>12</ZIndex>
+    <ZIndex>11</ZIndex>
     <ControlClass>FGIconControl</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -325,7 +325,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>IconControl2</ControlName>
-    <ZIndex>14</ZIndex>
+    <ZIndex>13</ZIndex>
     <ControlClass>FGIconControl</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -376,7 +376,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>Label1</ControlName>
-    <ZIndex>13</ZIndex>
+    <ZIndex>12</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -538,7 +538,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp1</ControlName>
-    <ZIndex>22</ZIndex>
+    <ZIndex>14</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -592,7 +592,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp10</ControlName>
-    <ZIndex>40</ZIndex>
+    <ZIndex>32</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -646,7 +646,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp11</ControlName>
-    <ZIndex>42</ZIndex>
+    <ZIndex>34</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -700,7 +700,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp2</ControlName>
-    <ZIndex>24</ZIndex>
+    <ZIndex>16</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -754,7 +754,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp3</ControlName>
-    <ZIndex>26</ZIndex>
+    <ZIndex>18</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -808,7 +808,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp4</ControlName>
-    <ZIndex>28</ZIndex>
+    <ZIndex>20</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -862,7 +862,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp5</ControlName>
-    <ZIndex>30</ZIndex>
+    <ZIndex>22</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -916,7 +916,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp6</ControlName>
-    <ZIndex>32</ZIndex>
+    <ZIndex>24</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -970,7 +970,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp7</ControlName>
-    <ZIndex>34</ZIndex>
+    <ZIndex>26</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1024,7 +1024,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp8</ControlName>
-    <ZIndex>36</ZIndex>
+    <ZIndex>28</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1078,7 +1078,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>lblUp9</ControlName>
-    <ZIndex>38</ZIndex>
+    <ZIndex>30</ZIndex>
     <ControlClass>FGLabel</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1430,7 +1430,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up1</ControlName>
-    <ZIndex>23</ZIndex>
+    <ZIndex>15</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1483,7 +1483,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up10</ControlName>
-    <ZIndex>41</ZIndex>
+    <ZIndex>33</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1536,7 +1536,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up11</ControlName>
-    <ZIndex>43</ZIndex>
+    <ZIndex>35</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1589,7 +1589,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up2</ControlName>
-    <ZIndex>25</ZIndex>
+    <ZIndex>17</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1642,7 +1642,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up3</ControlName>
-    <ZIndex>27</ZIndex>
+    <ZIndex>19</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1695,7 +1695,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up4</ControlName>
-    <ZIndex>29</ZIndex>
+    <ZIndex>21</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1748,7 +1748,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up5</ControlName>
-    <ZIndex>31</ZIndex>
+    <ZIndex>23</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1801,7 +1801,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up6</ControlName>
-    <ZIndex>33</ZIndex>
+    <ZIndex>25</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1854,7 +1854,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up7</ControlName>
-    <ZIndex>35</ZIndex>
+    <ZIndex>27</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1897,7 +1897,7 @@ end</LUACode>
       {"Name":"Tooltip"},
       {"Name":"UseAsTemplate","Value":{"@xsi:type":"xsd:string"}},
       {"Name":"VerticalAnchor","Value":{"@xsi:type":"xsd:int","#text":"0"}},
-      {"Name":"XPos","Value":{"@xsi:type":"xsd:int","#text":"30"}},
+      {"Name":"XPos","Value":{"@xsi:type":"xsd:int","#text":"29"}},
       {"Name":"YPos","Value":{"@xsi:type":"xsd:int","#text":"394"}}
 ]}}</Definition>
     <LUACode />
@@ -1907,7 +1907,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up8</ControlName>
-    <ZIndex>37</ZIndex>
+    <ZIndex>29</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},
@@ -1960,7 +1960,7 @@ end</LUACode>
   <WindowControls>
     <WindowName>circus</WindowName>
     <ControlName>up9</ControlName>
-    <ZIndex>39</ZIndex>
+    <ZIndex>31</ZIndex>
     <ControlClass>FGCheckbox</ControlClass>
     <Definition>{"ArrayOfFGControlPropertyInfo":{"@xmlns:xsd":"http://www.w3.org/2001/XMLSchema","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","FGControlPropertyInfo":[
       {"Name":"AdvancedAnchoring","Value":{"@xsi:type":"ArrayOfAdvancedAnchor"}},

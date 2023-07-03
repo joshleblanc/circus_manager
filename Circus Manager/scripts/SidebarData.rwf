@@ -2,7 +2,7 @@
   <Scripts>
     <ScriptName>SidebarData</ScriptName>
     <FolderID>2</FolderID>
-    <Script>local ADVERTISEMENT_TIERS = {
+    <Script>ADVERTISEMENT_TIERS = {
 	{ tier = 1, cost = 1, ant = 1 },
 	{ tier = 2, cost = 5, ant = 2 },
 	{ tier = 3, cost = 20, ant = 4 },
@@ -47,16 +47,6 @@ function onInit()
 			--aCustomFilters = {
 			--	["Type"] = { sField = "type" },
 			--}
-		},
-		["advertisement_tier"] = { 
-			bExport = false,
-			aDataMap = { "circus.advertisement_tiers" }, 
-			sRecordDisplayClass = "advertisement_tier", 
-			--sListDisplayClass = "abilitylist",
-			sSidebarCategory  = "campaign",
-			--aCustomFilters = {
-			--	["Type"] = { sField = "type" },
-			--}
 		}
 	}
 	
@@ -75,6 +65,19 @@ function onInit()
 		if shows then
 			shows.setPublic(true);
 		end
+		
+		--[[
+		local tricks = DB.findNode("circus.tricks");
+		if tricks then
+			tricks.setPublic(true);
+		end
+		
+		local trickTraits = DB.findNode("circus.trick_traits")
+		if trickTraits then 
+			trickTraits.setPublic(true)
+		end
+		--]]
+		
 		local advertisement_tiers = DB.createNode("circus.advertisement_tiers")
 		advertisement_tiers.setPublic(true)
 		DB.deleteChildren(advertisement_tiers)
