@@ -53,10 +53,8 @@ function onInit()
 	LibraryData.overrideRecordTypes(aRecordOverrides)
 	LibraryData.setRecordViews(aListViews)
 	
-	Debug.console("INITTING SIDEBAR 1")
-	
+
 	if Session.IsHost then
-		Debug.console("INITTING SIDEBAR 2")
 		local circuses = DB.findNode("circus.circuses");
 		if circuses then
 			circuses.setPublic(true);

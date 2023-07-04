@@ -3,10 +3,10 @@
   <RulesetProperties>
     <Name>Circus Manager</Name>
     <CompilationType>Extension</CompilationType>
-    <Description />
+    <Description>Manage circuses in extinction curse</Description>
     <DisplayName />
     <DisplayVersion />
-    <Author />
+    <Author>Joshua LeBlanc</Author>
     <Website />
     <Version>1</Version>
     <Release>0</Release>
@@ -8861,10 +8861,8 @@ function onInit()
 	LibraryData.overrideRecordTypes(aRecordOverrides)
 	LibraryData.setRecordViews(aListViews)
 	
-	Debug.console("INITTING SIDEBAR 1")
-	
+
 	if Session.IsHost then
-		Debug.console("INITTING SIDEBAR 2")
 		local circuses = DB.findNode("circus.circuses");
 		if circuses then
 			circuses.setPublic(true);
@@ -8914,8 +8912,8 @@ end
 &lt;root&gt;
 	&lt;string name="library_recordtype_label_tricks"&gt;Tricks&lt;/string&gt;
 	&lt;string name="library_recordtype_label_trick_traits"&gt;Trick Traits&lt;/string&gt;
-	&lt;string name="library_recordtype_label_circuses"&gt;Circuses&lt;/string&gt;
-	&lt;string name="library_recordtype_label_shows"&gt;Shows&lt;/string&gt;
+	&lt;string name="library_recordtype_label_circus"&gt;Circuses&lt;/string&gt;
+	&lt;string name="library_recordtype_label_show"&gt;Shows&lt;/string&gt;
 &lt;/root&gt;      
     </XML>
   </XMLFiles>
