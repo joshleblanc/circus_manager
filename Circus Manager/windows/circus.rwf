@@ -193,6 +193,12 @@ end
 function updateUpgrades()
 	for i=1,11 do 
 		if UPGRADE_DEPS[i] then 
+			if self["up" .. tostring(i)].getValue() == 1 then 
+				self["up" .. tostring(i-1)].setReadOnly(true)
+			elseif not self["up" .. tostring(i-1)].isReadOnly() then
+				self["up" .. tostring(i-1)].setReadOnly(false)
+			end
+			
 			if self["up" .. tostring(i - 1)].getValue() == 1 then 
 				self["up" .. tostring(i)].setReadOnly(false)
 			else
@@ -1156,10 +1162,10 @@ end</LUACode>
       {"Name":"InsertBefore"},
       {"Name":"Invisible"},
       {"Name":"LinkFieldAllowDrop"},
-      {"Name":"LinkFieldClass"},
-      {"Name":"LinkFieldDescriptionField"},
+      {"Name":"LinkFieldClass","Value":{"@xsi:type":"xsd:string","#text":"circus"}},
+      {"Name":"LinkFieldDescriptionField","Value":{"@xsi:type":"xsd:string","#text":"name"}},
       {"Name":"LinkFieldRecordName"},
-      {"Name":"LinkFieldSelfOnEmpty"},
+      {"Name":"LinkFieldSelfOnEmpty","Value":{"@xsi:type":"xsd:boolean","#text":"true"}},
       {"Name":"MaximumHeight"},
       {"Name":"MaximumWidth"},
       {"Name":"Merge"},
@@ -1739,7 +1745,7 @@ end</LUACode>
       {"Name":"UseAsTemplate","Value":{"@xsi:type":"xsd:string"}},
       {"Name":"VerticalAnchor","Value":{"@xsi:type":"xsd:int","#text":"0"}},
       {"Name":"XPos","Value":{"@xsi:type":"xsd:int","#text":"30"}},
-      {"Name":"YPos","Value":{"@xsi:type":"xsd:int","#text":"308"}}
+      {"Name":"YPos","Value":{"@xsi:type":"xsd:int","#text":"309"}}
 ]}}</Definition>
     <LUACode />
     <GroupIndex>0</GroupIndex>

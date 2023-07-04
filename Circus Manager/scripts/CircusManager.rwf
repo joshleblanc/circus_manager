@@ -7,6 +7,40 @@
 	DB.setValue(nodeShow, "performed", "number", 1)
 end
 
+function PreviousShow(nodeShow)
+
+	local _, sShowName = DB.getValue(nodeShow, "linkPrevShow")
+	local nodePrevShow = DB.findNode(sShowName)
+	
+	if nodePrevShow then 
+		return nodePrevShow
+	else 
+		local shows = DB.getChildren(DB.getParent(nodeShow))
+		
+		local showNumber = DB.getValue(nodeShow, "showNumber", 0)
+
+		for _, show in pairs(shows) do 
+			local showNumberToCheck = DB.getValue(show, "showNumber", 0)
+			if showNumberToCheck &lt; showNumber then 
+				DB.setValue(nodeShow, "linkPrevShow", "windowreference", "show", DB.getPath(show))
+				DB.setValue(nodeShow, "prevShow", "string", DB.getValue(show, "name"))
+				return show
+			end
+		end
+	end
+	
+	return nil
+end
+
+function PreviousPreviousShow(nodeShow)
+	return PreviousShow(PreviousShow(nodeShow))
+end
+
+function GuessCircus()
+	local circuses = DB.findNode("circus.circuses")
+	return DB.getChildList(circuses)[1]
+end
+
 function CalcShow(nodeShow)
 	if DB.getValue(nodeShow, "performed") then return end
 	
@@ -14,7 +48,24 @@ function CalcShow(nodeShow)
 	
 	local nodeCircus = DB.findNode(sCircusRecordName)
 	
-	if not nodeCircus then return end
+	if not nodeCircus then 
+		Debug.chat("No circus, finding...")
+		nodeCircus = GuessCircus()
+		Debug.chat(nodeCircus)
+		if nodeCircus then 
+			DB.setValue(nodeShow, "linkCircus", "windowreference", "circus", DB.getPath(nodeCircus))
+			DB.setValue(nodeShow, "circus", "string", DB.getValue(nodeCircus, "name"))
+		else
+			return 
+		end
+	end
+	
+	local showCount = DB.getChildCount(DB.getParent(nodeShow))
+	if not DB.getValue(nodeShow, "showNumber") then 
+		DB.setValue(nodeShow, "showNumber", "number", showCount)
+	end
+	
+	local prevShow = PreviousShow(nodeShow)
 	
 	CalcCircus(nodeCircus)
 
@@ -31,6 +82,17 @@ function CalcShow(nodeShow)
 	local binos = DB.getValue(nodeShow, "binos") == 1
 	if binos then 
 		maxAnt = nil
+	end
+	
+	if prevShow then 
+		local prevAnt = DB.getValue(prevShow, "anticipation")
+		if DB.getValue(prevShow, "extraordinaryMerch") == 1 then 
+			anticipation = anticipation + math.floor(prevAnt * 0.75)
+		elseif DB.getValue(prevShow, "qualityMerch") == 1 then 
+			anticipation = anticipation + math.floor(prevAnt * 0.5)
+		elseif DB.getValue(prevShow, "basicMerch") == 1 then 
+			anticipation = anticipation + math.floor(prevAnt * 0.25)
+		end
 	end
 		
 	if DB.getValue(nodeCircus, "up4") == 1 then 
