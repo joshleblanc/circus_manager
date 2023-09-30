@@ -187,7 +187,9 @@ function CalcCircus(nodeCircus)
 	
 	DB.setValue(nodeCircus, "maxAnt", 'number', maxAnt)
 	DB.setValue(nodeCircus, "prestige", "number", prestige)
-end</Script>
+end
+
+</Script>
     <RegisterScript>true</RegisterScript>
     <Encoding />
   </Scripts>
