@@ -54,12 +54,12 @@
 ]}}</Definition>
     <LUACode>
 local DEPS = {
+	up2 = {},
 	up3 = { "up2" }
 }
 
 function onInit()
-	Debug.chat("Resolve upgrade dependencies")
-	DependencyManager.ResolveUpgradeDependencies(self, DEPS)
+	DependencyManager.WireupSubwindow(self, DEPS)
 end
 </LUACode>
     <GroupIndex>0</GroupIndex>

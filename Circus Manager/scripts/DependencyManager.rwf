@@ -2,21 +2,28 @@
   <Scripts>
     <ScriptName>DependencyManager</ScriptName>
     <FolderID>1</FolderID>
-    <Script>function ResolveUpgradeDependencies(window, deps)
+    <Script>function WireupSubwindow(window, deps)
+	ResolveUpgradeDependencies(window, deps)
 	for k, v in pairs(deps) do 
-		Debug.chat("Trying to enable " .. k)
+		window[k].onValueChanged = function(a)
+			ResolveUpgradeDependencies(window, deps)
+			CircusManager.CalcCircus(window.getDatabaseNode())
+		end
+	end
+end
+
+function ResolveUpgradeDependencies(window, deps)
+	for k, v in pairs(deps) do 
 		TryEnable(window, k, v)
 	end
 end
 
 function TryEnable(window, control, deps)
 	window[control].setReadOnly(false)
-	Debug.chat("Enable " .. control)
 	for _, dep in ipairs(deps) do 
-		Debug.chat("Checking " .. dep )
 		if window[dep].getValue() == 0 then 
-			Debug.chat("Disable " .. control)
 			window[control].setReadOnly(true)
+			window[control].setValue(0)
 			return
 		end
 	end
